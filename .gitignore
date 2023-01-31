@@ -1,0 +1,4 @@
+chrome/node_modules/
+chrome/package-lock.json
+client/node_modules/
+client/package-lock.json

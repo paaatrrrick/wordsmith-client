@@ -1,0 +1,55 @@
+{
+    "name": "Wordsmith",
+    "description": "Write with purpose. Write with Wordsmith.",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Open the popup"
+    },
+    "permissions": [
+        "scripting",
+        "activeTab",
+        "storage",
+        "declarativeContent"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "images/*.png",
+                "images/*.svg"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "icons": {
+        "16": "logo192.png",
+        "48": "logo192.png",
+        "128": "logo192.png"
+    },
+    "background": {
+        "service_worker": "scripts/background.js"
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "scripts/content.js"
+            ],
+            "css": [
+                "styles/content.css"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "oauth2": {
+        "client_id": "429975552067-n41kcurj3r6ffarsg6kqergqee7pc9qj.apps.googleusercontent.com",
+        "scopes": [
+            "https://www.googleapis.com/auth/userinfo.email",
+            "https://www.googleapis.com/auth/userinfo.profile"
+        ]
+    }
+}

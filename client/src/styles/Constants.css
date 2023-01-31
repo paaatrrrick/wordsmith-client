@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400&display=swap');
+
+
+:root {
+    --primary1: #fea39e;
+    --primary2: #4c3aff;
+    --primary3: #4d50fb;
+    --text2: #8497af;
+    --offwhite: #f8fafc;
+    --offBlack: #1c2c40;
+}
+
+
+
+* {
+    color: var(--offBlack);
+    ;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.button1 {
+    text-align: center;
+    padding: 12px 24px;
+    font-weight: bold;
+    color: white;
+    transition: all 300ms ease-in-out;
+    background-color: var(--primary2);
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+}
+
+.button1.button1Small {
+    padding: 10px 20px;
+    font-size: 16px;
+
+}
+
+.button1:hover {
+    background-color: var(--primary3);
+    cursor: pointer;
+}
+
+.button2 {
+    text-align: center;
+    padding: 6px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    color: var(--primary2);
+    font-weight: 300;
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid var(--primary2);
+}
+
+.button2:hover {
+    background-color: rgb(250, 250, 251);
+    cursor: pointer;
+}
+
+
+
+
+.Resources-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
+}
+
+
+
+.Resources>h1 {
+    margin-top: 50px;
+    color: var(--text2);
+    font-weight: 600;
+    margin-left: 50px;
+    font-size: 45px;
+    margin-bottom: 30px;
+}
+
+.Resources>.resourcesA {
+    margin-top: 30px;
+    margin-left: 50px;
+    color: black;
+    font-size: 20px;
+}

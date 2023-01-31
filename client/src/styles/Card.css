@@ -1,0 +1,47 @@
+.home-thirdChunkCards {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 14%;
+    max-width: 140px;
+    aspect-ratio: 1/1;
+    /* margin: 20px; */
+    padding: 8px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* border: 2px solid black; */
+    border-radius: 4px;
+    /* box-shadow: 0px 20px 50px 0px rgb(0 0 0 / 20%); */
+}
+
+.card-title {
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 15px;
+    font-size: 15px;
+    background-color: transparent !important;
+}
+
+.card-img {
+    width: 40%;
+    margin-top: 10px;
+    background-color: transparent !important;
+    filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%) contrast(85%) !important;
+
+}
+
+.card:hover {
+    background-color: var(--wordsmithPrimary2);
+}
+
+.card:hover>.card-img {
+    filter: invert(98%) sepia(7%) saturate(6%) hue-rotate(161deg) brightness(105%) contrast(100%) !important;
+}

@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400&display=swap');
+
+* {
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary1: #ff7266;
+  --primary2: #4c3aff;
+  --primary3: #4d50fb;
+  --text2: #393e45;
+}
+
+/* .body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f2f2f2;
+} */
+
+.App {
+  width: 250px;
+  height: 325px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 12px 48px rgb(26 33 52 / 11%);
+}
+
+.app-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 92%;
+  height: 40px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+
+.app-logo {
+  width: 20px;
+  height: 20px;
+}
+
+.app-header h1 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  margin-left: 5px;
+  color: black;
+}
+
+.Auth {
+  width: 87%;
+  height: flex-grow;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Auth h3 {
+  font-size: 18px;
+  font-weight: 300;
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: var(--text2);
+}
+
+
+.app-footer {
+  width: 92%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  border-top: 1px solid #e0e0e0;
+}
+
+
+
+.button1 {
+  text-align: center;
+  padding: 6px 12px;
+  font-weight: bold;
+  color: white;
+  transition: all 300ms ease-in-out;
+  background-color: var(--primary2);
+  font-size: 12px;
+  border-radius: 8px;
+  border: none;
+}
+
+.button1:hover {
+  background-color: var(--primary3);
+  cursor: pointer;
+}
+
+
+
+.button2 {
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+  padding: 4px 0px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  color: var(--primary2);
+  font-weight: 300;
+  border-radius: 8px;
+  border: 1px solid var(--primary2);
+}
+
+.button2:hover {
+  background-color: rgb(250, 250, 251);
+  cursor: pointer;
+}
+
+.button3 {
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+  padding: 6px 0px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--primary2);
+  font-size: 13px;
+  border-radius: 8px;
+  border: none;
+}
+
+.button3:hover {
+  background-color: var(--primary3);
+  cursor: pointer;
+}
+
+
+.Main {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.Main2 {
+  width: 100%;
+  height: 98%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+
+.main2H1Div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.main2H1Div>h1 {
+  font-size: 16px;
+  margin-top: 10px;
+  font-weight: 500;
+  margin-bottom: 0px;
+  margin-left: 5%;
+  color: var(--text2);
+}
+
+.main2Section {
+  width: 90%;
+}
+
+.main2Section>p {
+  font-size: 12px;
+  width: 100%;
+  font-weight: 300;
+  padding: 0;
+  margin-top: 10px;
+  color: var(--text2);
+}
+
+.main2Section>hr {
+  width: 100%;
+  margin-top: 5px;
+  border: 1px solid var(--primary3);
+}
