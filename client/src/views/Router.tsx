@@ -7,6 +7,7 @@ import Error from './Error';
 import Resources from './Resources';
 //@ts-ignore
 import Auth from './auth/Auth';
+import Privacypolicy from "./Privacypolicy";
 
 const Router = () => {
 
@@ -27,11 +28,13 @@ const Router = () => {
                 <Route exact path='/resources' component={Resources} />
                 <Route exact path='/signup' render={() => <Auth screen={'Sign Up'} />} />
                 <Route exact path='/signin' render={() => <Auth screen={'Sign In'} />} />
+                <Route exact path='/privacypolicy' component={Privacypolicy} />
                 {/* <Route exact path='/signup' render={<Auth screen={'Sign Up'} />} />
                 <Route exact path='/signin' render={<Auth screen={'Sign In'} />} /> */}
                 {/* <Route exact path='/login/chrome' render={<Login shouldCloseTabOnSubmit={true} />} /> */}
                 {/* <Route exact path='/profile/:id' render={routeProps => <ViewProfile {...routeProps} />} /> */}
-                <Route exact path='*' component={Error} />
+                <Route exact path='/*' component={Home} />
+                <Route exact path='*' component={Home} />
             </Switch>
         </div>
     );

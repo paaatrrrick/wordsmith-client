@@ -18,6 +18,8 @@ import firstVid from '../resources/firstVid.mp4';
 import secondVid from '../resources/secondVid.mp4';
 //@ts-ignore
 import thirdVid from '../resources/thirdVid.mp4';
+import CONSTANTS from '../constants/api';
+import AUTH_CONSTANTS from '../constants/auth';
 
 
 
@@ -98,9 +100,9 @@ const Home = () => {
                 </div>
                 <div className="home-headerRight">
                     <Link className="button2 loginRight" to="/signin" id="login">Log in</Link>
-                    <div className="button1 button1Small">
+                    <a href={CONSTANTS.CHROME_LINK} target='_blank' className="button1 button1Small">
                         Add to Chrome
-                    </div>
+                    </a>
                 </div>
             </div>
             <div className="home-firstBigChunk">
@@ -120,7 +122,7 @@ const Home = () => {
                             </b>
                         </div>
                         <p>Write more and spend less time reviewing for mistakes</p>
-                        <div className="home-addToChrome button1">Add to Chrome - it's Free</div>
+                        <a href={CONSTANTS.CHROME_LINK} target='_blank' className="home-addToChrome button1">Add to Chrome - it's Free</a>
                     </div>
                     <img src={mainPicture} alt="mainPicture" className="home-mainPicture" />
                 </div>

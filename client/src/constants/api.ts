@@ -5,6 +5,7 @@ type constantTypes = {
     GOOGLE_AUTH: string;
     CHECK_IF_LOGGED_IN: string;
     RECENT_CHANGES: string;
+    CHROME_LINK: string;
 }
 
 const PRODUCTION_API_ENDPOINT: string = 'https://wordsmith-api-production.up.railway.app';
@@ -17,6 +18,7 @@ const CONSTANTS: constantTypes = {
     GOOGLE_AUTH: '/auth/google',
     CHECK_IF_LOGGED_IN: '/auth/isLoggedIn',
     RECENT_CHANGES: '/recentchanges',
+    CHROME_LINK: 'https://chrome.google.com/webstore/detail/wordsmith/ffjginbaonjceegjiapjgopplicfpbcm/related',
 };
 
 export default CONSTANTS;

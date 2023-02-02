@@ -1,6 +1,19 @@
-// chrome.runtime.onInstalled.addListener(() => {
-//     console.log('HEREHRERHEHREHRHREHE')
-// });
+const PRODUCTION_BROWSER_ENDPOINT = 'https://try-wordsmith.netlify.app';
+const DEVELOPMENT_BROWSER_ENDPOINT = 'http://localhost:3006';
+
+const SIGN_UP = '/signup';
+
+
+
+
+chrome.runtime.onInstalled.addListener(function () {
+    chrome.tabs.create({
+        url: PRODUCTION_BROWSER_ENDPOINT + SIGN_UP,
+        active: true
+    });
+
+    return false;
+});
 
 
 // chrome.runtime.onMessage.addListener(
@@ -14,25 +27,3 @@
 //     }
 // );
 
-
-
-// chrome.runtime.onMessage.addListener(
-//     function (request, sender, sendResponse) {
-//         console.log('me 123');
-//         console.log(request);
-//         sendResponse({ response: "Hello from extension" });
-//     });
-
-// if (nextState === "ON") {
-//     // Insert the CSS file when the user turns the extension on
-//     await chrome.scripting.insertCSS({
-//       files: ["focus-mode.css"],
-//       target: { tabId: tab.id },
-//     });
-//   } else if (nextState === "OFF") {
-//     // Remove the CSS file when the user turns the extension off
-//     await chrome.scripting.removeCSS({
-//       files: ["focus-mode.css"],
-//       target: { tabId: tab.id },
-//     });
-//   }

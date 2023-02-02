@@ -118,11 +118,11 @@
   padding: 4px 0px;
   font-size: 14px;
   font-weight: bold;
-  color: white;
   color: var(--primary2);
   font-weight: 300;
   border-radius: 8px;
   border: 1px solid var(--primary2);
+  background-color: white;
 }
 
 .button2:hover {

@@ -18,8 +18,13 @@ const stateManagment = {
 
 const REQUIRED_LENGTH = 15;
 const currentlySelectedPills = [];
+
 const PRODUCTION_API_ENDPOINT = 'https://wordsmith-api-production.up.railway.app';
 const DEVELOPMENT_API_ENDPOINT = 'http://localhost:3000';
+const PRODUCTION_BROWSER_ENDPOINT = 'https://try-wordsmith.netlify.app';
+const DEVELOPMENT_BROWSER_ENDPOINT = 'http://localhost:3006';
+
+
 const chrome_signup = 'wordsmith-chrome-signup-944';
 const chrome_login = 'wordsmith-chrome-login-944';
 const chrome_logout = 'wordsmith-chrome-logout-944';
@@ -29,7 +34,7 @@ const circle_id = 'wordsmith-944-wordCircle';
 
 const CONSTANTS = {
     API_ENDPOINT: PRODUCTION_API_ENDPOINT,
-    BROWSWER_LOCATION: 'http://localhost:3006',
+    BROWSWER_LOCATION: PRODUCTION_BROWSER_ENDPOINT,
     BROWSER_LOGIN: '/signin',
     BROWSER_SIGNUP: '/signup',
     WORK_MAGIC: '/chrome/workmagic',

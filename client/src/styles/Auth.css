@@ -111,3 +111,7 @@
     font-size: 14px;
     color: #6d758d;
 }
+
+#authSvg {
+    background-color: var(--offwhite);
+}
