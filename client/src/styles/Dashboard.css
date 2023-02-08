@@ -1,3 +1,10 @@
+#canvas {
+    border: 3px solid blue;
+    width: 600px;
+    height: 500px;
+}
+
+
 .Dashboard {
     width: 100%;
     height: 100%;

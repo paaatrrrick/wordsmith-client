@@ -45,11 +45,11 @@ filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%)
     background-color: white;
     box-shadow: 0 3px 5px 0px rgb(60, 60, 60);
     transition: all 0.2s ease-in-out;
-    z-index: 1000;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 2147483638;
 }
 
 .wordsmith-944-wordCircle:hover {
@@ -66,7 +66,6 @@ filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%)
     transition: all 0.5s ease-in-out;
     width: 15px;
     height: 15px;
-    z-index: 1001;
     filter: none !important;
 }
 
@@ -82,8 +81,8 @@ filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%)
     align-items: center;
     justify-content: flex-start;
     box-shadow: 0px 5px 6px 4px rgb(26 33 52 / 11%);
-    z-index: 1001;
     border-radius: 5px;
+    z-index: 2147483638;
 }
 
 
@@ -93,7 +92,6 @@ filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%)
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    z-index: 1002;
     background-color: white;
     border: 4px;
 }
@@ -104,7 +102,6 @@ filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%)
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    z-index: 1003;
 }
 
 .wordsmith-944-PopupSubmitDiv,
@@ -119,7 +116,6 @@ filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%)
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1004;
 }
 
 
@@ -131,7 +127,6 @@ filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%)
 .wordsmith-944-PopupPillImg {
     width: 12px;
     height: 12px;
-    z-index: 1005;
     background-color: transparent !important;
     filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%) contrast(85%) !important;
 }
@@ -149,7 +144,6 @@ filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%)
 .wordsmith-944-PopupHoverDiv {
     font-family: 'Roboto', sans-serif;
     background-color: var(--wordsmithPrimary2);
-    z-index: 1010;
     border: none;
     position: absolute;
     border-radius: 4px 4px 0px 0px;
@@ -180,7 +174,6 @@ filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%)
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    z-index: 1003;
 }
 
 .wordsmith-944-PopupCloseDiv {
@@ -192,7 +185,6 @@ filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%)
 .wordsmith-944-PopupCloseImg {
     width: 15px;
     height: 15px;
-    z-index: 1004;
     background-color: transparent !important;
     filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%) contrast(85%) !important;
 }
@@ -227,7 +219,6 @@ filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%)
     border: 1px solid lightgray;
     width: 100%;
     min-height: 100px;
-    z-index: 1002;
     background-color: white;
     border: 0;
 }

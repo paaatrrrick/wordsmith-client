@@ -8,32 +8,22 @@ import '../../styles/Auth.css'
 import { getAuth, GoogleAuthProvider, signInWithPopup, OAuthProvider } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 
-// // const signInWithMicrosoft = () => {
-// //   console.log('at this point microsoft');
-// //   signInWithPopup(auth, microsoftProvider)
-// //     .then((result) => {
-// //       console.log('we are back microsoft');
-// //       console.log(result);
-// //       const credential = OAuthProvider.credentialFromResult(result);
-// //       //@ts-ignore
-// //       const accessToken = credential.accessToken;
-// //       //@ts-ignore
-// //       const idToken = credential.idToken;
-// //       console.log(credential);
-// //     })
-// //     .catch((error) => {
-// //       console.log(error);
-// //     });
-// // };
-
-
-// const firebaseConfig = {
-//     apiKey: "AIzaSyANfoLDGZsVAl8NwHJUlgLrUynJJMaSsg0",
-//     authDomain: "auth-8b1ef.firebaseapp.com",
-//     projectId: "auth-8b1ef",
-//     storageBucket: "auth-8b1ef.appspot.com",
-//     messagingSenderId: "445273762769",
-//     appId: "1:445273762769:web:81f403cae7cb5fe3760ef0",
+// const signInWithMicrosoft = () => {
+//   console.log('at this point microsoft');
+//   signInWithPopup(auth, microsoftProvider)
+//     .then((result) => {
+//       console.log('we are back microsoft');
+//       console.log(result);
+//       const credential = OAuthProvider.credentialFromResult(result);
+//       //@ts-ignore
+//       const accessToken = credential.accessToken;
+//       //@ts-ignore
+//       const idToken = credential.idToken;
+//       console.log(credential);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
 // };
 
 const firebaseConfig = {
@@ -121,11 +111,10 @@ const Auth = (props: AuthProps) => {
     const handleGoogle = async () => {
         signInWithPopup(auth, provider)
             .then((result) => {
-                console.log('we are back');
                 // const credential = GoogleAuthProvider.credentialFromResult(result);
                 fetch(`${CONSTANTS.API_ENDPOINT}${CONSTANTS.GOOGLE_AUTH}`, {
                     method: 'POST',
-                    body: JSON.stringify({ idToken: 'asdfads', email: result.user.email }),
+                    body: JSON.stringify({ idToken: result.user.uid, email: result.user.email }),
                     headers: { 'Content-Type': 'application/json' }
                 })
                     //read the response and set the token

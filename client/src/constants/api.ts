@@ -12,7 +12,7 @@ const PRODUCTION_API_ENDPOINT: string = 'https://wordsmith-api-production.up.rai
 const DEVELOPMENT_API_ENDPOINT: string = 'http://localhost:3000';
 
 const CONSTANTS: constantTypes = {
-    API_ENDPOINT: PRODUCTION_API_ENDPOINT,
+    API_ENDPOINT: DEVELOPMENT_API_ENDPOINT,
     EMAIL_SIGNUP_AUTH: '/auth/signup-email',
     EMAIL_LOGIN_AUTH: '/auth/login-email',
     GOOGLE_AUTH: '/auth/google',
