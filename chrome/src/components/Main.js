@@ -8,9 +8,7 @@ const Main = (setIsLoggedIn) => {
     const [recentChanges, setRecentChanges] = useState([]);
 
     useEffect(() => {
-        console.log('use effect main');
         window.chrome.storage.sync.get(['wordsmith_944_jwt_chrome'], async (result) => {
-            console.log(result.wordsmith_944_jwt_chrome);
             if (result.wordsmith_944_jwt_chrome) {
                 const jwt = result.wordsmith_944_jwt_chrome;
                 const response = await fetch(CONSTANTS.API_ENDPOINT + CONSTANTS.RECENT_CHANGES, {
