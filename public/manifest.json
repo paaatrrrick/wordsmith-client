@@ -1,0 +1,42 @@
+{
+    "name": "asdf",
+    "description": "Write with purpose. Write with Wordsmith.",
+    "version": "1.01",
+    "manifest_version": 3,
+    "action": {
+        "default_title": "Wordsmith",
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "storage"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "*.png",
+                "*.svg"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "icons": {
+        "16": "logo192.png",
+        "48": "logo192.png",
+        "128": "logo192.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "content.js"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ]
+}

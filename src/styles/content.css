@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400&display=swap');
+
+.wordsmith-944-PopupElement {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+:root {
+    --wordsmithPrimary1: #ff7266;
+    --wordsmithPrimary2: #4c3aff;
+    --wordsmithPrimary3: #4d50fb;
+    --wordsmithText2: #393e45;
+}
+
+/*
+https://codepen.io/sosuke/pen/Pjoqqp
+
+
+white
+filter: invert(98%) sepia(7%) saturate(6%) hue-rotate(161deg) brightness(105%) contrast(100%);
+
+#4c3aff
+filter: invert(22%) sepia(88%) saturate(6950%) hue-rotate(248deg) brightness(107%) contrast(101%);
+
+
+#4d50fb
+filter: invert(45%) sepia(96%) saturate(5030%) hue-rotate(230deg) brightness(94%) contrast(110%);
+
+black
+filter: invert(0%) sepia(17%) saturate(3151%) hue-rotate(11deg) brightness(93%) contrast(109%);
+
+#393e45
+filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%) contrast(85%);
+*/
+
+
+
+
+.wordsmith-944-wordCircle {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 3px 5px 0px rgb(60, 60, 60);
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2147483638;
+}
+
+.wordsmith-944-wordCircle:hover {
+    background-color: rgb(233, 229, 255);
+    cursor: pointer;
+}
+
+
+.wordsmith-944-wordCircle:hover>.wordsmith-944-wordLogo {
+    background-color: rgb(233, 229, 255);
+}
+
+.wordsmith-944-wordLogo {
+    transition: all 0.5s ease-in-out;
+    width: 15px;
+    height: 15px;
+    filter: none !important;
+}
+
+
+
+
+.wordsmith-944-PopupBodyDiv {
+    max-width: 50vw;
+    width: 275px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0px 5px 6px 4px rgb(26 33 52 / 11%);
+    border-radius: 5px;
+    z-index: 2147483638;
+}
+
+
+.wordsmith-944-PopupFirstRowDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: white;
+    border: 4px;
+}
+
+
+.wordsmith-944-PopupFirstRowDivLeft {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.wordsmith-944-PopupSubmitDiv,
+.wordsmith-944-PopupCloseDiv,
+.wordsmith-944-PopupPill {
+    background-color: white;
+    border: none;
+    border-radius: 2px;
+    margin: 0px 1px;
+    width: 23px;
+    height: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.wordsmith-944-PopupPill :first-of-type {
+    margin-left: 0px;
+}
+
+
+.wordsmith-944-PopupPillImg {
+    width: 12px;
+    height: 12px;
+    background-color: transparent !important;
+    filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%) contrast(85%) !important;
+}
+
+.wordsmith-944-PopupPill:hover {
+    border-radius: 0px 0px 2px 2px;
+    background-color: var(--wordsmithPrimary3);
+    cursor: pointer;
+}
+
+.wordsmith-944-PopupPill:hover>img {
+    filter: invert(98%) sepia(7%) saturate(6%) hue-rotate(161deg) brightness(105%) contrast(100%) !important;
+}
+
+.wordsmith-944-PopupHoverDiv {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--wordsmithPrimary2);
+    border: none;
+    position: absolute;
+    border-radius: 4px 4px 0px 0px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 2px 6px;
+    text-align: center;
+}
+
+
+.wordsmith-944-PopupPillSelected {
+    background-color: var(--wordsmithPrimary3);
+}
+
+.wordsmith-944-PopupPillSelected>img {
+    filter: invert(98%) sepia(7%) saturate(6%) hue-rotate(161deg) brightness(105%) contrast(100%) !important;
+}
+
+
+
+
+
+
+
+.wordsmith-944-PopupFirstRowDivRight {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.wordsmith-944-PopupCloseDiv {
+    margin-right: 0px;
+}
+
+
+.wordsmith-944-PopupSubmitImg,
+.wordsmith-944-PopupCloseImg {
+    width: 15px;
+    height: 15px;
+    background-color: transparent !important;
+    filter: invert(20%) sepia(14%) saturate(497%) hue-rotate(175deg) brightness(98%) contrast(85%) !important;
+}
+
+
+.wordsmith-944-PopupSubmitDiv:hover {
+    background-color: #35cb70;
+    cursor: pointer;
+}
+
+.wordsmith-944-PopupSubmitDiv:hover>img {
+    filter: invert(98%) sepia(7%) saturate(6%) hue-rotate(161deg) brightness(105%) contrast(100%) !important;
+}
+
+
+.wordsmith-944-PopupCloseDiv:hover {
+    background-color: hsl(0, 90%, 66%);
+    cursor: pointer;
+}
+
+.wordsmith-944-PopupCloseDiv:hover>img {
+    filter: invert(98%) sepia(7%) saturate(6%) hue-rotate(161deg) brightness(105%) contrast(100%) !important;
+}
+
+
+
+.wordsmith-944-PopupSecondRowDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid lightgray;
+    width: 100%;
+    min-height: 100px;
+    background-color: white;
+    border: 0;
+}
+
+
+.wordsmith-944-PopupSpinnerDiv {
+    border: 3px solid var(--wordsmithPrimary3);
+    border-radius: 50%;
+    border-top: 3px solid #fff;
+    width: 40px;
+    height: 40px;
+    animation: spinner 2s ease-in-out infinite;
+    /* center this div in relation to the parent div */
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.wordsmith-944-PopupAuthText {
+    font-size: 15px;
+    font-weight: 300;
+    width: 85%;
+    margin-top: 7px;
+    color: var(--wordsmithText2);
+}
+
+.wordsmith-944-PopupAuthButtonLogin {
+    text-align: center;
+    width: 85%;
+    margin-top: 10px;
+    padding: 4px 0px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    color: var(--wordsmithPrimary3);
+    font-weight: 300;
+    border-radius: 8px;
+    border: 1px solid var(--wordsmithPrimary3);
+}
+
+.wordsmith-944-PopupAuthButtonLogin:hover {
+    background-color: rgb(250, 250, 251);
+    cursor: pointer;
+}
+
+.wordsmith-944-PopupAuthButtonSignUp {
+    text-align: center;
+    width: 85%;
+    padding: 6px 12px;
+    margin: 5px 0px;
+    font-weight: bold;
+    color: white;
+    transition: all 300ms ease-in-out;
+    background-color: var(--wordsmithPrimary3);
+    font-size: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.wordsmith-944-PopupAuthButtonSignUp:hover {
+    background-color: var(--wordsmithPrimary2);
+    cursor: pointer;
+}
+
+
+
+.wordsmith-944-PopupServerErrorDiv {
+    font-size: 15px;
+    font-weight: 300;
+    width: 85%;
+    margin-top: 7px;
+    color: hsl(0, 90%, 66%);
+}
+
+.wordsmith-944-PopupResponseTextP {
+    font-size: 16px;
+    font-weight: 400;
+    width: 95%;
+    margin-top: 5px;
+    color: var(--wordsmithText2);
+    min-height: 50px;
+    overflow-y: auto;
+    max-height: 150px;
+}
+
+.wordsmith-944-PopupResponseButton {
+    text-align: center;
+    width: 95%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px 0px;
+    font-weight: bold;
+    color: white;
+    background-color: var(--wordsmithPrimary3);
+    font-size: 12px;
+    border-radius: 6px;
+    border: none;
+}
+
+.wordsmith-944-PopupResponseButton:hover {
+    background-color: var(--wordsmithPrimary2);
+    cursor: pointer;
+}
