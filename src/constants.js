@@ -9,6 +9,10 @@ const PRODUCTION_BROWSER_ENDPOINT = 'https://try-wordsmith.netlify.app';
 const API_ENDPOINT = DEVELOPMENT_API_ENDPOINT;
 const BROWSWER_LOCATION = DEVELOPMENT_BROWSER_ENDPOINT;
 
+const GRAMMAR_CONSTANTS = {
+    CLASS_NAME: 'wordsmith-944-g-generic',
+}
+
 const POPUP_CONSTANTS = {
     API_ENDPOINT: API_ENDPOINT,
     EMAIL_SIGNUP_AUTH: '/auth/signup-email',
@@ -47,4 +51,4 @@ const dropDownPillData = [
 
 
 //export all three constants
-export { POPUP_CONSTANTS, CHROME_CONSTANTS, dropDownPillData };
+export { POPUP_CONSTANTS, CHROME_CONSTANTS, dropDownPillData, GRAMMAR_CONSTANTS };
