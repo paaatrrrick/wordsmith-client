@@ -7,7 +7,7 @@ class Span {
         this.elementId = elementId;
         this.error = error;
         this.parent = parent;
-        this.id = id
+        this.id = id;
         this.text = element.textContent;
         this.addHighlight(error);
     }
@@ -30,25 +30,28 @@ class Span {
         popUpButton.innerText = 'X';
         popup.appendChild(popUpButton);
 
-        const span = document.getElementById(`${this.id}`);
-        computePosition(span, popup, {
-            middleware: [autoPlacement({
-                allowedPlacements: ['top', 'bottom'],
-                margin: 10,
-            })],
-        }).then((pos) => {
-            const { x, y } = pos;
-            popup.style.left = x + 'px';
-            popup.style.top = y + 'px';
-        });
-        document.body.appendChild(popup);
+        const spanArray = document.getElementsByClassName(`${this.id}`);
+        if (spanArray.length >= 0) {
+            const span = spanArray[0];
+            computePosition(span, popup, {
+                middleware: [autoPlacement({
+                    allowedPlacements: ['top', 'bottom'],
+                    margin: 10,
+                })],
+            }).then((pos) => {
+                const { x, y } = pos;
+                popup.style.left = x + 'px';
+                popup.style.top = y + 'px';
+            });
+            document.body.appendChild(popup);
+        } else {
+            console.log('no spans');
+        }
+
 
         popUpButton.addEventListener('click', () => {
-            this.parent.removeSpan(this.id);
             handleMouseOver();
-            document.removeEventListener('mouseover', handleMouseOver);
-            const span = document.getElementById(`${this.id}`);
-            span.remove();
+            this.removeSpanAndItsContents();
         });
 
         const handleMouseOverChecks = (event) => {
@@ -61,18 +64,49 @@ class Span {
             const popups = document.getElementsByClassName('wordsmith-944-g-PopUp');
             if (popups.length > 0) {
                 for (let i = 0; i < popups.length; i++) {
-                    console.log('removing')
                     popups[i].remove();
                 }
-                document.removeEventListener('mouseover', handleMouseOverChecks);
             }
+            document.removeEventListener('mouseover', handleMouseOverChecks);
         }
         //add on a hover event to the page that will remove the popup if it is not hovered over the popup or the span
         document.addEventListener('mouseover', handleMouseOverChecks);
     }
 
+
+    removeSpanAndItsContents() {
+        const spanArrary = document.getElementsByClassName(`${this.id}`);
+        if (spanArrary.length >= 0) {
+            const span = spanArrary[0];
+            span.remove();
+            this.removeIdFromParent();
+        }
+    }
+
+
+    deleteOuterSpan(remove = true) {
+        const spanArray = document.getElementsByClassName(`${this.id}`);
+        if (spanArray.length >= 0) {
+            console.log(spanArray);
+            const spanElement = spanArray[0];
+            console.log(spanElement);
+            let parentElement = spanElement.parentNode;
+            console.log(parentElement);
+            let spanElementInnerHTML = spanElement.innerHTML;
+            let parentInnerHTML = parentElement.innerHTML;
+            let startIndex = parentInnerHTML.indexOf(spanElement.outerHTML);
+            let endIndex = startIndex + spanElement.outerHTML.length;
+            parentElement.innerHTML = parentInnerHTML.slice(0, startIndex) + spanElementInnerHTML + parentInnerHTML.slice(endIndex);
+            if (remove) {
+                this.removeIdFromParent();
+            }
+        };
+    };
+
+
+
+
     addHighlight(error) {
-        console.log(error);
         const startIndex = error.index;
         const endIndex = error.offset + startIndex + 1;
         const reason = error.reason;
@@ -82,30 +116,35 @@ class Span {
         var startNode = this.getTextNodeAtPosition(startIndex);
         var endNode = this.getTextNodeAtPosition(endIndex);
 
+        //check if either the start or node is null or an integer
+        if (startNode.node === null || endNode.node === null || typeof startNode.node === 'number' || typeof endNode.node === 'number') {
+            return;
+        }
         range.setStart(startNode.node, startNode.position);
         range.setEnd(endNode.node, endNode.position);
-        var selectedText = range.toString();
 
         var span = document.createElement("span");
         span.classList.add(GRAMMAR_CONSTANTS.CLASS_NAME);
         span.classList.add(`${GRAMMAR_CONSTANTS.CLASS_NAME}-${this.id}`);
         span.classList.add('wordsmith-944-g-spanUnderline');
-        var textNode = document.createTextNode(selectedText);
-        span.appendChild(textNode);
-        span.id = this.id;
-        span.addEventListener('mouseover', () => {
+        span.classList.add(this.id);
+        span.addEventListener('mouseenter', () => {
             this.createPopup();
         });
-        range.deleteContents();
-        range.insertNode(span);
 
-        var x = new MutationObserver(function (e) {
-            if (e[0].removedNodes) {
-                this.parent.removeSpan(this.id);
-            }
-        });
 
-        x.observe(document.getElementById(`${this.id}`), { childList: true });
+
+        try {
+            range.surroundContents(span);
+            //TODO: in the situation that the range containt the endining half of an element or the starting half, then this will throw an error
+        } catch (e) {
+            console.log('error on making span surround contents errror');
+        }
+
+    }
+
+    removeIdFromParent() {
+        this.parent.removeSpan(this.id);
     }
 
     getTextNodeAtPosition(position) {
@@ -126,10 +165,9 @@ class Span {
         return { node: null, position: 0 };
     }
 
-
-    toString() {
-        return `Element: ${this.elementId} Text: ${this.text}`;
-    }
+    // toString() {
+    //     return this.id;
+    // }
 }
 
 export default Span;
