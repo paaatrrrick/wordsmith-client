@@ -1,6 +1,6 @@
 //@ts-ignore
 import { Redirect } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import CONSTANTS from '../constants/api';
 import AUTH_CONSTANTS from '../constants/auth';
 import isLoggedIn from '../utils/isLoggedIn';
@@ -14,18 +14,16 @@ interface recentChangeInterface {
 }
 
 const Dashboard = () => {
+
     const [shouldRedirfect, setShouldRedirect] = useState<Boolean>(false);
     const [recentChanges, setRecentChanges] = useState<recentChangeInterface[]>([]);
 
     const getRecentChanges = async () => {
-        console.log('use effect main');
         const response = await fetch(CONSTANTS.API_ENDPOINT + CONSTANTS.RECENT_CHANGES, {
             // @ts-ignore
             headers: { "x-access'wordsmith-auth-token": window.localStorage.getItem(AUTH_CONSTANTS.token) }
         });
 
-        console.log('we are back');
-        console.log(response);
         if (response.ok) {
             const data = await response.json();
             setRecentChanges(data.recentChanges.reverse());
