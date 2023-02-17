@@ -1,0 +1,45 @@
+:root {
+    --primary1: #ff7266;
+    --primary2: #4c3aff;
+    --primary3: #4d50fb;
+    --text2: #393e45;
+}
+
+
+.wordsmith-944-g-PopUpBody {
+    top: 0px;
+    left: 0px;
+    width: 70px;
+    height: 70px;
+    background-color: white;
+    border: 2px solid black;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2147483636;
+}
+
+.wordsmith-944-g-spanUnderline {
+    border-bottom: 2px solid var(--primary2);
+    border-radius: 2px;
+}
+
+.wordsmith-944-g-spanUnderline:hover {
+    background-color: rgb(232, 232, 232);
+    opacity: 70%;
+    cursor: pointer;
+}
+
+
+
+.wordsmith-944-g-PopupFirstSecetion {
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: 2px solid black;
+    position: absolute;
+}

@@ -1,14 +1,16 @@
-import CONSTANTS from "../constants";
+import React from 'react';
+import { render } from 'react-dom';
+import { POPUP_CONSTANTS } from "../constants";
 
 const Auth = () => {
     const login = () => {
         window.open(
-            `${CONSTANTS.BROWSWER_LOCATION}${CONSTANTS.BROWSER_LOGIN}`, "_blank");
+            `${POPUP_CONSTANTS.BROWSWER_LOCATION}${POPUP_CONSTANTS.BROWSER_LOGIN}`, "_blank");
     };
 
     const signup = () => {
         window.open(
-            `${CONSTANTS.BROWSWER_LOCATION}${CONSTANTS.BROWSER_SIGNUP}`, "_blank");
+            `${POPUP_CONSTANTS.BROWSWER_LOCATION}${POPUP_CONSTANTS.BROWSER_SIGNUP}`, "_blank");
     };
     return (
         <div className="Auth">

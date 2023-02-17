@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import CONSTANTS from "../constants";
+import { POPUP_CONSTANTS } from "../constants";
 
 
 const Main = (setIsLoggedIn) => {
@@ -11,11 +11,9 @@ const Main = (setIsLoggedIn) => {
         window.chrome.storage.sync.get(['wordsmith_944_jwt_chrome'], async (result) => {
             if (result.wordsmith_944_jwt_chrome) {
                 const jwt = result.wordsmith_944_jwt_chrome;
-                const response = await fetch(CONSTANTS.API_ENDPOINT + CONSTANTS.RECENT_CHANGES, {
+                const response = await fetch(POPUP_CONSTANTS.API_ENDPOINT + POPUP_CONSTANTS.RECENT_CHANGES, {
                     headers: { "x-access'wordsmith-auth-token": jwt }
                 });
-                console.log('we are back');
-                console.log(response);
                 if (response.status === 401) {
                     window.chrome.storage.sync.set({ wordsmith_944_jwt_chrome: "" });
                     setIsLoggedIn(false);
