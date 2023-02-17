@@ -35,7 +35,8 @@ class Span {
             const span = spanArray[0];
             computePosition(span, popup, {
                 middleware: [autoPlacement({
-                    allowedPlacements: ['top', 'bottom'],
+                    allowedPlacements: ['top-end', 'bottom-start'],
+                    crossAxis: true,
                     margin: 10,
                 })],
             }).then((pos) => {
@@ -44,8 +45,6 @@ class Span {
                 popup.style.top = y + 'px';
             });
             document.body.appendChild(popup);
-        } else {
-            console.log('no spans');
         }
 
 
@@ -86,17 +85,24 @@ class Span {
 
     deleteOuterSpan(remove = true) {
         const spanArray = document.getElementsByClassName(`${this.id}`);
-        if (spanArray.length >= 0) {
-            console.log(spanArray);
+        console.log('id: ' + String(this.id));
+        console.log('deteting outer span:');
+        console.log(spanArray);
+        if (spanArray.length > 0) {
             const spanElement = spanArray[0];
-            console.log(spanElement);
             let parentElement = spanElement.parentNode;
-            console.log(parentElement);
             let spanElementInnerHTML = spanElement.innerHTML;
-            let parentInnerHTML = parentElement.innerHTML;
-            let startIndex = parentInnerHTML.indexOf(spanElement.outerHTML);
-            let endIndex = startIndex + spanElement.outerHTML.length;
-            parentElement.innerHTML = parentInnerHTML.slice(0, startIndex) + spanElementInnerHTML + parentInnerHTML.slice(endIndex);
+            let startIndex = Array.prototype.indexOf.call(parentElement.childNodes, spanElement);
+            let textNode = document.createTextNode(spanElementInnerHTML);
+            parentElement.removeChild(spanElement);
+            parentElement.insertBefore(textNode, parentElement.childNodes[startIndex]);
+            // const spanElement = spanArray[0];
+            // let parentElement = spanElement.parentNode;
+            // let spanElementInnerHTML = spanElement.innerHTML;
+            // let parentInnerHTML = parentElement.innerHTML;
+            // let startIndex = parentInnerHTML.indexOf(spanElement.outerHTML);
+            // let endIndex = startIndex + spanElement.outerHTML.length;
+            // parentElement.innerHTML = parentInnerHTML.slice(0, startIndex) + spanElementInnerHTML + parentInnerHTML.slice(endIndex);
             if (remove) {
                 this.removeIdFromParent();
             }
@@ -110,8 +116,6 @@ class Span {
         const startIndex = error.index;
         const endIndex = error.offset + startIndex + 1;
         const reason = error.reason;
-        const contentEditableElement = this.element;
-        var textContent = contentEditableElement.textContent;
         var range = document.createRange();
         var startNode = this.getTextNodeAtPosition(startIndex);
         var endNode = this.getTextNodeAtPosition(endIndex);
@@ -131,7 +135,6 @@ class Span {
         span.addEventListener('mouseenter', () => {
             this.createPopup();
         });
-
 
 
         try {

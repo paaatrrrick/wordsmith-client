@@ -5,22 +5,24 @@ import { GRAMMAR_CONSTANTS } from '../constants.js';
 
 class Writeable {
     constructor(element, elementId) {
-        console.log('being created');
         this.element = element;
         this.elementId = elementId;
         this.i = 0;
         this.spans = {};
         this.checkText(element.textContent);
-        element.addEventListener('input', (event) => {
-            if (this.i > 1) {
-                console.log('removing spans from writeable');
-                for (let span in this.spans) {
-                    const currentSpan = this.spans[span];
-                    currentSpan.deleteOuterSpan(false);
-                }
-                this.spans = {};
+        this.inputEventListener();
+    }
+
+    inputEventListener() {
+        this.element.addEventListener('input', (event) => {
+            for (let span in this.spans) {
+                const currentSpan = this.spans[span];
+                currentSpan.deleteOuterSpan(false);
             }
-            this.checkText(element.textContent);
+            this.spans = {};
+            this.i = 0;
+            // this.i = 0;
+            this.checkText(this.element.textContent);
         });
     }
 
@@ -28,25 +30,21 @@ class Writeable {
         if (this.spans[id]) {
             delete this.spans[id];
         }
-        console.log('updated');
-        console.log(this.spans);
     }
-    //replaceText() 
-    //create a method to replace the text with the new text
 
-    //create a method to check the text for errors
     checkText(text) {
+        // console.log('checking text');
+        // console.log(text);
         let errors = WriteGood(text);
+        console.log(errors);
         for (let error of errors) {
             this.i += 1;
             const id = `${this.elementId}-wordsmith-944-span-${this.i}`;
             const span = new Span(this.element, this.elementId, error, this, id);
-            console.log('updated checkText');
+            console.log('creating span: ' + span);
             this.spans[id] = span;
-            console.log(this.spans);
         }
     };
-    //create a toString method for console.logs to show the text and elementId
 }
 
 

@@ -25,9 +25,10 @@ class HoverCircle {
             }
         });
     }
+
     lisenForDeleteKeyStroke() {
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Backspace' || event.key === 'Delete') {
+        document.addEventListener('input', (event) => {
+            if (event.inputType === 'deleteContentBackward' || event.inputType === 'deleteContentForward') {
                 if (document.getElementById(CHROME_CONSTANTS.CIRCLE_ID)) {
                     document.getElementById(CHROME_CONSTANTS.CIRCLE_ID).remove();
                 }
@@ -105,7 +106,6 @@ class HoverCircle {
         if (text.length > CHROME_CONSTANTS.REQUIRED_LENGTH) {
             // Check if there is a selection (i.e. cursor in place)
             if (selection.rangeCount !== 0) {
-                // Clone the range
                 const range = selection.getRangeAt(0).cloneRange();
                 // Collapse the range to the start, so there are not multiple chars selected
                 if (selection.extentNode !== range.startContainer || selection.extentOffset !== range.startOffset) {
@@ -115,16 +115,13 @@ class HoverCircle {
                     // Collapse the range to the start if selection direction is left-to-right
                     range.collapse(true);
                 }
-                // getCientRects returns all the positioning information we need
                 const rect = range.getClientRects()[0];
                 if (rect) {
-                    const x = rect.left; // since the caret is only 1px wide, left == right
-                    const y = rect.top; // top edge of the caret
+                    const x = rect.left;
+                    const y = rect.top;
 
                     const activeElementScrollTop = activeElement.scrollTop;
                     const activeElementScrollLeft = activeElement.scrollLeft;
-
-
                     //get the scroll bar position of the page
                     const pageScrollTop = window.pageYOffset;
                     const pageScrollLeft = window.pageXOffset;
@@ -133,10 +130,7 @@ class HoverCircle {
                     const posY = y + activeElementScrollTop + pageScrollTop;
 
                     const rangeForParameters = selection.getRangeAt(0);
-                    //update position to match changes in the page scroll bar and the active element scroll bar
-
                     const parameters = { type: 'contenteditable', range: rangeForParameters };
-
 
                     this.createOrUpdateCircle(posX, posY, text, activeElement, parameters);
                 }

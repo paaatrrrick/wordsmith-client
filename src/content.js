@@ -20,11 +20,6 @@ document.addEventListener("selectionchange", function () {
     }
 });
 
-document.addEventListener('click', function (event) {
-    if (event.target.isContentEditable) {
-        addElementToWriteable(event.target);
-    }
-});
 
 window.onload = function () {
     const contenteditableElements = document.querySelectorAll('[contenteditable="true"]');
@@ -33,6 +28,28 @@ window.onload = function () {
     });
     // const inputAndTextAreaElements = document.querySelectorAll('input, textarea');
     // console.log('inputAndTextAreaElements', inputAndTextAreaElements);
+}
+
+document.addEventListener('input', (event) => {
+    detectContenteditable(event.target);
+});
+
+document.addEventListener('click', function (event) {
+    detectContenteditable(event.target);
+});
+
+
+const detectContenteditable = (eventTarget) => {
+    if (eventTarget.isContentEditable) {
+        const recursive = (element) => {
+            if (element.getAttribute('contenteditable') === 'true') {
+                return element;
+            } else {
+                return recursive(element.parentElement);
+            }
+        }
+        addElementToWriteable(recursive(eventTarget));
+    }
 }
 
 const idsToWriteable = {};
@@ -48,7 +65,6 @@ const addElementToWriteable = (element) => {
         element.id = id;
     }
     idsToWriteable[element.id] = new Writeable(element, id);
-    return;
 }
 
 
