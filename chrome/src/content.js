@@ -1,10 +1,9 @@
 
 import './styles/content.css';
+import './styles/Grammar.css'
 import { messageListener } from './methods/authentication.js';
-import ContentEdit from './classes/contenteditable/ContentEdit.js';
-import Textarea from './classes/textarea/Textarea.js';
+import Writeable from './classes/writeable/Writeable.js';
 import HoverCircle from './classes/highlight/HoverCircle';
-import { GRAMMAR_CONSTANTS } from './constants.js';
 
 const myHoverCircle = new HoverCircle();
 
@@ -21,6 +20,7 @@ document.addEventListener("selectionchange", function () {
         }
     }
 });
+
 
 
 window.onload = function () {
@@ -77,9 +77,9 @@ const addElementToWriteable = (element, type = 'contenteditbale') => {
         element.id = id
     }
     if (type === 'textarea') {
-        idsToWriteable[element.id] = new Textarea(element, id, true);
+        idsToWriteable[element.id] = new Writeable(element, id, true);
     } else {
-        idsToWriteable[element.id] = new Textarea(element, id, false);
+        idsToWriteable[element.id] = new Writeable(element, id, false);
     }
 }
 
