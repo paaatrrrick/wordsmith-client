@@ -10,6 +10,7 @@
 
 .wordsmith-944-g-spanUnderline {
     border-bottom: 2px solid var(--primary2);
+    z-index: 21474836380;
 }
 
 .wordsmith-944-g-spanUnderline:hover {

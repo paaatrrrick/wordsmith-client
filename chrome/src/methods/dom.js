@@ -35,8 +35,6 @@ const deleteTextWriteable = (element, start, end, parameters) => {
 
     } else if (parameters.type === 'contenteditable') {
         const range = parameters.range;
-        // Create a new text node with the replacement text]
-        // Replace the selected text with the replacement text
         range.deleteContents();
     }
 }

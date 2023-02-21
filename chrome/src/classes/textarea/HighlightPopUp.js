@@ -74,7 +74,7 @@ class HighlightPopUp {
         if (span) {
             computePosition(span, popup, {
                 middleware: [autoPlacement({
-                    allowedPlacements: ['top-end', 'bottom-start'],
+                    allowedPlacements: ['top', 'bottom'],
                     crossAxis: true,
                     margin: 10,
                 })],

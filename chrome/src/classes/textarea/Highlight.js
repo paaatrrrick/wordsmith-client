@@ -6,7 +6,6 @@ import { deleteTextWriteable } from '../../methods/dom.js';
 
 class Highlight {
     constructor(element, error, parent, id, key, isTextarea) {
-        console.log('creating highlight');
         this.element = element;
         this.parent = parent;
         this.error = error;
@@ -57,15 +56,9 @@ class Highlight {
         range.setStart(startNode.node, startNode.position);
         range.setEnd(endNode.node, endNode.position);
 
-        const rect = range.getClientRects()[0];
-        if (rect) {
-            const coordinates = {
-                left: rect.left,
-                top: rect.top,
-                right: rect.right,
-                bottom: rect.bottom
-            };
-            this.coordinatesToElement(coordinates);
+        this.params = { type: 'contenteditable', range: range }
+        for (let rect of range.getClientRects()) {
+            this.coordinatesToElementContentEditable(rect);
         }
     }
 
@@ -89,31 +82,44 @@ class Highlight {
     }
 
 
+    coordinatesToElementContentEditable(rect) {
+        const x = rect.left;
+        const y = rect.top;
+
+        const activeElementScrollTop = this.element.scrollTop;
+        const activeElementScrollLeft = this.element.scrollLeft;
+        //get the scroll bar position of the page
+        const pageScrollTop = window.pageYOffset;
+        const pageScrollLeft = window.pageXOffset;
+
+        const posX = x + activeElementScrollLeft + pageScrollLeft;
+        const posY = y + activeElementScrollTop + pageScrollTop;
+        const fontSize = parseFloat(window.getComputedStyle(this.element).getPropertyValue('font-size'));
+
+        this.createDiv(posX, posY, rect.right - rect.left, fontSize);
+    }
+
     createTextAreaHighlight(error) {
         const startIndex = error.index;
         const endIndex = startIndex + error.offset;
         const caretStart = getCaretCoordinates(this.element, startIndex);
         const caretEnd = getCaretCoordinates(this.element, endIndex);
-        console.log('caretStart', caretStart);
-        console.log('caretEnd', caretEnd);
         const coordinates = {
             left: caretStart.left,
             top: caretStart.top,
             right: caretEnd.left,
             bottom: caretEnd.top
         };
-        this.coordinatesToElement(coordinates);
+        this.coordinatesToElementTextArea(coordinates);
     };
 
-    coordinatesToElement(coordinates) {
-        console.log('coordinatesToElement')
-        console.log(coordinates);
+    coordinatesToElementTextArea(coordinates) {
+
         const fontSize = parseFloat(window.getComputedStyle(this.element).getPropertyValue('font-size'));
 
 
         const activeElementScrollTop = this.element.scrollTop;
         const activeElementScrollLeft = this.element.scrollLeft
-        console.log(activeElementScrollLeft);
 
 
         //get the scroll bar position of the page
@@ -156,6 +162,9 @@ class Highlight {
         div.classList.add('wordsmith-944-g-spanUnderline');
         div.classList.add(`${this.parent.getElementId()}`);
         div.classList.add(`${this.id}`);
+        //set zIndex of the div
+        div.style.zIndex = "2147483630";
+
         div.id = uniqueID;
         div.addEventListener('mouseenter', () => {
             if (tempThis.popUp === null && !tempThis.isIgnoring) {

@@ -48,8 +48,7 @@ class Textarea {
 
     checkText(text) {
         let errors = this.removeOverlappingErrors(WriteGood(text));
-        console.log('checking the text: ' + text);
-        console.log(errors);
+        console.log('this point 2');
         for (let error of errors) {
             let sentence = this.getCompleteSentence(text, error.index, error.index + error.offset);
             const ignoreKey = `${sentence}-${error.reason}`;
