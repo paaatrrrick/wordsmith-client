@@ -1,13 +1,11 @@
 import WriteGood from 'write-good';
 import Span from './Span.js';
-import { GRAMMAR_CONSTANTS } from '../constants.js';
 
 
-class Writeable {
+class ContentEdit {
     constructor(element, elementId) {
         this.element = element;
         this.elementId = elementId;
-        this.i = 0;
         this.spans = {};
         this.checkText(element.textContent);
         this.inputEventListener();
@@ -20,8 +18,6 @@ class Writeable {
                 currentSpan.deleteOuterSpan(false);
             }
             this.spans = {};
-            this.i = 0;
-            // this.i = 0;
             this.checkText(this.element.textContent);
         });
     }
@@ -33,19 +29,23 @@ class Writeable {
     }
 
     checkText(text) {
-        // console.log('checking text');
-        // console.log(text);
         let errors = WriteGood(text);
-        console.log(errors);
         for (let error of errors) {
-            this.i += 1;
-            const id = `${this.elementId}-wordsmith-944-span-${this.i}`;
+            const id = `${this.elementId}-wordsmith-944-span-${this.generateId()}`;
             const span = new Span(this.element, this.elementId, error, this, id);
-            console.log('creating span: ' + span);
             this.spans[id] = span;
         }
     };
+
+
+    //generate a random id in a fast time complexity
+    generateId() {
+        const id = Math.random().toString(36).substr(2, 9);
+        return id;
+    }
+
+
 }
 
 
-export default Writeable;
+export default ContentEdit;

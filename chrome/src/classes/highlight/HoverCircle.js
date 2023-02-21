@@ -1,5 +1,5 @@
-import { CHROME_CONSTANTS } from '../constants.js';
-import getCaretCoordinates from '../methods/caretCoordinates.js';
+import { CHROME_CONSTANTS } from '../../constants.js';
+import getCaretCoordinates from '../../methods/caretCoordinates.js';
 import PopUpBar from './PopUpBar.js';
 class HoverCircle {
     constructor() {
@@ -130,6 +130,8 @@ class HoverCircle {
                     const posY = y + activeElementScrollTop + pageScrollTop;
 
                     const rangeForParameters = selection.getRangeAt(0);
+                    console.log('handleContenteditable')
+                    console.log(rangeForParameters);
                     const parameters = { type: 'contenteditable', range: rangeForParameters };
 
                     this.createOrUpdateCircle(posX, posY, text, activeElement, parameters);

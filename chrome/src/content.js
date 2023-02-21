@@ -1,11 +1,13 @@
 
 import './styles/content.css';
 import { messageListener } from './methods/authentication.js';
-import Writeable from './classes/Writeable.js';
-import HoverCircle from './classes/HoverCircle';
-
+import ContentEdit from './classes/contenteditable/ContentEdit.js';
+import Textarea from './classes/textarea/Textarea.js';
+import HoverCircle from './classes/highlight/HoverCircle';
+import { GRAMMAR_CONSTANTS } from './constants.js';
 
 const myHoverCircle = new HoverCircle();
+
 
 document.addEventListener("selectionchange", function () {
     var selection = window.getSelection();
@@ -22,21 +24,31 @@ document.addEventListener("selectionchange", function () {
 
 
 window.onload = function () {
-    const contenteditableElements = document.querySelectorAll('[contenteditable="true"]');
-    contenteditableElements.forEach((element) => {
+    let contenteditable = document.querySelectorAll('[contenteditable="true"]');
+    contenteditable.forEach((element) => {
         addElementToWriteable(element);
     });
-    // const inputAndTextAreaElements = document.querySelectorAll('input, textarea');
-    // console.log('inputAndTextAreaElements', inputAndTextAreaElements);
+    const inputAndTextAreaElements = document.querySelectorAll('input, textarea');
+    inputAndTextAreaElements.forEach((element) => {
+        addElementToWriteable(element, 'textarea');
+    });
 }
 
 document.addEventListener('input', (event) => {
     detectContenteditable(event.target);
+    detectTextarea(event.target);
 });
 
 document.addEventListener('click', function (event) {
     detectContenteditable(event.target);
+    detectTextarea(event.target);
 });
+
+const detectTextarea = (eventTarget) => {
+    if (eventTarget.tagName === 'TEXTAREA') {
+        addElementToWriteable(eventTarget, 'textarea');
+    }
+}
 
 
 const detectContenteditable = (eventTarget) => {
@@ -55,16 +67,20 @@ const detectContenteditable = (eventTarget) => {
 const idsToWriteable = {};
 
 
-const addElementToWriteable = (element) => {
+const addElementToWriteable = (element, type = 'contenteditbale') => {
     var id = element.id;
     if (idsToWriteable[id]) {
         return;
     }
     if (id) {
-        id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        element.id = id;
+        id = `w${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`;
+        element.id = id
     }
-    idsToWriteable[element.id] = new Writeable(element, id);
+    if (type === 'textarea') {
+        idsToWriteable[element.id] = new Textarea(element, id, true);
+    } else {
+        idsToWriteable[element.id] = new Textarea(element, id, false);
+    }
 }
 
 

@@ -16,7 +16,6 @@ const messageListener = (event) => {
                 //     console.log('Value currently is ' + result.wordsmith_944_jwt_chrome);
                 // });
             } else if (type === CHROME_CONSTANTS.CHROME_LOGOUT) {
-                console.log('we are in the logout function');
                 logout();
             }
         }

@@ -1,5 +1,6 @@
-import { CHROME_CONSTANTS, dropDownPillData } from '../constants.js';
-import { messageListener, logout, postRequest } from '../methods/authentication.js';
+import { CHROME_CONSTANTS, dropDownPillData } from '../../constants.js';
+import { messageListener, logout, postRequest } from '../../methods/authentication.js';
+import { replaceSelection } from '../../methods/dom.js';
 
 
 class PopUpBar {
@@ -211,31 +212,13 @@ class PopUpBar {
                         responseButton.innerText = 'Accept';
                         responseButton.addEventListener('click', () => {
                             this.closeClicked();
-                            this.replaceSelection(data, activeElement, parameters);
+                            replaceSelection(data, activeElement, parameters);
                         });
                         popupSecondRowDiv.appendChild(responseButton);
                     });
                 }
             });
         };
-    }
-
-    replaceSelection(text, activeElement, parameters) {
-        // Replace the selection with the given text in input and textarea elements
-        if (parameters.type === 'textarea') {
-            const start = activeElement.selectionStart;
-            const end = activeElement.selectionEnd;
-            activeElement.value = activeElement.value.substring(0, start) + text + activeElement.value.substring(end);
-            activeElement.selectionStart = start;
-            activeElement.selectionEnd = start + text.length;
-        } else if (parameters.type === 'contenteditable') {
-            const range = parameters.range;
-            // Create a new text node with the replacement text
-            const replacementText = document.createTextNode(text);
-            // Replace the selected text with the replacement text
-            range.deleteContents();
-            range.insertNode(replacementText);
-        }
     }
 
     closeClicked() {

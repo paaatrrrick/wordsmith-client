@@ -13,8 +13,6 @@ function Popup() {
 
     useEffect(() => {
         window.chrome.storage.sync.get(['wordsmith_944_jwt_chrome'], async (result) => {
-            console.log('constants: ' + POPUP_CONSTANTS.API_ENDPOINT + POPUP_CONSTANTS.CHECK_IF_LOGGED_IN)
-            console.log('Status: ' + result.wordsmith_944_jwt_chrome);
             const jwt = result.wordsmith_944_jwt_chrome;
             if (jwt && jwt !== "" && jwt !== undefined && jwt !== null && jwt !== "undefined" && jwt !== "null") {
                 const response = await fetch(POPUP_CONSTANTS.API_ENDPOINT + POPUP_CONSTANTS.CHECK_IF_LOGGED_IN, {
