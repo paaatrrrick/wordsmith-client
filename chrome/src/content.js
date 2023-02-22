@@ -26,7 +26,7 @@ document.addEventListener("selectionchange", function () {
 window.onload = function () {
     let contenteditable = document.querySelectorAll('[contenteditable="true"]');
     contenteditable.forEach((element) => {
-        addElementToWriteable(element);
+        detectContenteditable(element);
     });
     const inputAndTextAreaElements = document.querySelectorAll('input, textarea');
     inputAndTextAreaElements.forEach((element) => {
@@ -69,17 +69,19 @@ const idsToWriteable = {};
 
 const addElementToWriteable = (element, type = 'contenteditbale') => {
     var id = element.id;
-    if (idsToWriteable[id]) {
+    //detect if the element has an id
+    if (idsToWriteable[id] && element.id && element.id !== '' && element.id !== ' ') {
         return;
     }
-    if (id) {
+    //set id to the id with trimmed whitespace 
+    if (!id || id.trim() === '' || !id.trim()) {
         id = `w${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`;
         element.id = id
     }
     if (type === 'textarea') {
-        idsToWriteable[element.id] = new Writeable(element, id, true);
+        idsToWriteable[element.id] = new Writeable(element, true);
     } else {
-        idsToWriteable[element.id] = new Writeable(element, id, false);
+        idsToWriteable[element.id] = new Writeable(element, false);
     }
 }
 

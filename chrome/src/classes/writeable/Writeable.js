@@ -1,11 +1,10 @@
 import WriteGood from 'write-good';
 import Highlight from "./Highlight";
 
-class Textarea {
-    constructor(element, elementId, isTextarea) {
-        console.log('creating textarea: ' + isTextarea);
+class Writeable {
+    constructor(element, isTextarea) {
         this.element = element;
-        this.elementId = elementId;
+        this.elementId = `w${this.generateId()}`;
         this.ignore = {};
         this.isTextarea = isTextarea;
         if (isTextarea) {
@@ -13,7 +12,7 @@ class Textarea {
         } else {
             this.checkText(element.textContent);
         }
-        this.inputEventListener();
+        this.addEventListeners();
 
     }
 
@@ -26,29 +25,63 @@ class Textarea {
         return this.elementId;
     }
 
+    addEventListeners() {
+        this.inputEventListener();
+        this.scrollEventListener();
+        this.mutationObserver();
+    }
+
     inputEventListener() {
         this.element.addEventListener('input', (event) => {
-            this.removeAllHighlights();
+            this.refresh();
+        });
+    }
+
+    scrollEventListener() {
+        this.element.addEventListener('scroll', (event) => {
+            this.refresh();
         });
     }
 
 
+    mutationObserver() {
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                this.refresh();
+            }
+        });
+        resizeObserver.observe(this.element);
+    };
 
-    removeAllHighlights() {
+    isElementVisible(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+
+
+    refresh(rebuild = true) {
         const highlights = document.querySelectorAll(`.${this.elementId}`);
         for (let highlight of highlights) {
             highlight.remove();
         };
-        if (this.isTextarea) {
-            this.checkText(this.element.value);
-        } else {
-            this.checkText(this.element.textContent);
+        if (rebuild) {
+            if (this.isTextarea) {
+                this.checkText(this.element.value);
+            } else {
+                this.checkText(this.element.textContent);
+            }
         }
     }
 
     checkText(text) {
         let errors = this.removeOverlappingErrors(WriteGood(text));
-        console.log('this point 2');
+        // let errors = this.removeOverlappingErrors(WriteGood(text, { passive: false }));
         for (let error of errors) {
             let sentence = this.getCompleteSentence(text, error.index, error.index + error.offset);
             const ignoreKey = `${sentence}-${error.reason}`;
@@ -102,4 +135,4 @@ class Textarea {
     }
 }
 
-export default Textarea;
+export default Writeable;

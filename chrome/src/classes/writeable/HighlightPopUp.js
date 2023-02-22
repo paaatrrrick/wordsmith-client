@@ -111,8 +111,6 @@ class HighlightPopUp {
 
     ignore(tempThis) {
         const spanElementArr = document.querySelectorAll(`.${this.genericParentClass}`);
-        console.log('ignoring');
-        console.log(spanElementArr);
         for (let spanElement of spanElementArr) {
             spanElement.classList = [];
         }

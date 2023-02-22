@@ -1,5 +1,4 @@
-import { GRAMMAR_CONSTANTS } from '../../constants.js'
-import getCaretCoordinates from '../../methods/caretCoordinates.js';
+import getCaretCoordinates from 'textarea-caret';
 import HighlightPopUp from './HighlightPopUp.js';
 import { deleteTextWriteable } from '../../methods/dom.js';
 
@@ -30,7 +29,7 @@ class Highlight {
 
     removeSpanAndItsContents(tempThis) {
         deleteTextWriteable(tempThis.element, this.error.index, this.error.index + this.error.offset, tempThis.params);
-        this.parent.removeAllHighlights();
+        this.parent.refresh();
     }
 
 
@@ -114,7 +113,6 @@ class Highlight {
     };
 
     coordinatesToElementTextArea(coordinates) {
-
         const fontSize = parseFloat(window.getComputedStyle(this.element).getPropertyValue('font-size'));
 
 
@@ -150,28 +148,30 @@ class Highlight {
     }
 
     createDiv(x, y, width, height) {
-        const tempThis = this
-        const uniqueID = this.id + `-${parseInt(y)}`;
-        const div = document.createElement('div');
-        div.style.position = 'absolute';
-        div.style.left = `${x}px`;
-        div.style.top = `${y}px`;
-        div.style.width = `${width}px`;
-        div.style.height = `${height}px`;
-        div.style.marginTop = '3px';
-        div.classList.add('wordsmith-944-g-spanUnderline');
-        div.classList.add(`${this.parent.getElementId()}`);
-        div.classList.add(`${this.id}`);
-        //set zIndex of the div
-        div.style.zIndex = "2147483630";
-
-        div.id = uniqueID;
-        div.addEventListener('mouseenter', () => {
-            if (tempThis.popUp === null && !tempThis.isIgnoring) {
-                tempThis.createPopup(tempThis.error, tempThis, uniqueID, tempThis.id);
-            }
-        });
-        document.body.appendChild(div);
+        const topOfActiveElementWithPadding = this.element.getBoundingClientRect().top + parseFloat(window.getComputedStyle(this.element).getPropertyValue('padding-top'));
+        const bottomOfActiveElementWithPadding = this.element.getBoundingClientRect().bottom - parseFloat(window.getComputedStyle(this.element).getPropertyValue('padding-bottom'));
+        if (y + height >= topOfActiveElementWithPadding && y <= bottomOfActiveElementWithPadding) {
+            const tempThis = this
+            const uniqueID = this.id + `-${parseInt(y)}`;
+            const div = document.createElement('div');
+            div.style.position = 'absolute';
+            div.style.left = `${x}px`;
+            div.style.top = `${y}px`;
+            div.style.width = `${width}px`;
+            div.style.height = `${height}px`;
+            div.style.marginTop = '3px';
+            div.classList.add('wordsmith-944-g-spanUnderline');
+            div.classList.add(`${this.parent.getElementId()}`);
+            div.classList.add(`${this.id}`);
+            div.style.zIndex = "2147483630";
+            div.id = uniqueID;
+            div.addEventListener('mouseenter', () => {
+                if (tempThis.popUp === null && !tempThis.isIgnoring) {
+                    tempThis.createPopup(tempThis.error, tempThis, uniqueID, tempThis.id);
+                }
+            });
+            document.body.appendChild(div);
+        }
     }
 
     createPopup(error, parent, uniqueIDForPositioning, genericParentClass) {
