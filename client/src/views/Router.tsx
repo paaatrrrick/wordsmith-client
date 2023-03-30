@@ -2,7 +2,6 @@
 import { Route, Switch } from "react-router-dom";
 import CONSTANTS from '../constants/api';
 import Home from './Home';
-import Canvas from "./Canvas";
 import Dashboard from './Dashboard';
 import Error from './Error';
 import Resources from './Resources';
@@ -11,21 +10,12 @@ import Auth from './auth/Auth';
 import Privacypolicy from "./Privacypolicy";
 
 const Router = () => {
-
-    // useEffect(() => {
-    //   console.log('useEffect');
-    //   fetch(`${CONSTANTS.API_ENDPOINT}/test`).then(res => res.json()).then(data => {
-    //     console.log('data');
-    //     console.log(data);
-    //   });
-    // });
     return (
         <div className="Router">
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/dashboard' component={Dashboard} />
                 <Route exact path='/home' component={Home} />
-                <Route exact path='/canvas' component={Canvas} />
                 <Route exact path='/error' component={Error} />
                 <Route exact path='/resources' component={Resources} />
                 <Route exact path='/signup' render={() => <Auth screen={'Sign Up'} />} />

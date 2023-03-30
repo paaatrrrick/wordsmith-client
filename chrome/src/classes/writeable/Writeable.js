@@ -80,8 +80,8 @@ class Writeable {
     }
 
     checkText(text) {
-        let errors = this.removeOverlappingErrors(WriteGood(text));
-        // let errors = this.removeOverlappingErrors(WriteGood(text, { passive: false }));
+        // let errors = this.removeOverlappingErrors(WriteGood(text));
+        let errors = this.removeOverlappingErrors(WriteGood(text, { passive: false }));
         for (let error of errors) {
             let sentence = this.getCompleteSentence(text, error.index, error.index + error.offset);
             const ignoreKey = `${sentence}-${error.reason}`;

@@ -1,93 +1,94 @@
-
 import './styles/content.css';
 import './styles/Grammar.css'
 import { messageListener } from './methods/authentication.js';
-import Writeable from './classes/writeable/Writeable.js';
-import HoverCircle from './classes/highlight/HoverCircle';
+import { createRewrite, createGrammar } from './methods/initializeClasses.js';
+import { CHROME_CONSTANTS, BROWSER_COMMUNICATION } from './constants.js';
 
-const myHoverCircle = new HoverCircle();
+const result = await window.chrome.storage.sync.get([CHROME_CONSTANTS.JWT_CHROME]);
+const rerwriteState = await window.chrome.storage.sync.get([CHROME_CONSTANTS.CAN_REWRITE]);
+const grammarState = await window.chrome.storage.sync.get([CHROME_CONSTANTS.CAN_GRAMMAR]);
 
-
-document.addEventListener("selectionchange", function () {
-    var selection = window.getSelection();
-    const text = selection.toString();
-    const activeElement = document.activeElement;
-    if (selection.rangeCount > 0) {
-        if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
-            myHoverCircle.handleInputOrTextArea(text, activeElement);
-        } else if (activeElement.isContentEditable) {
-            myHoverCircle.handleContenteditable(text, activeElement, selection);
-        }
-    }
-});
+console.log(result);
+console.log(rerwriteState);
+console.log(grammarState);
+console.log('chrome extneions just loaded');
 
 
+const isAuth = result[CHROME_CONSTANTS.JWT_CHROME]
 
-window.onload = function () {
-    let contenteditable = document.querySelectorAll('[contenteditable="true"]');
-    contenteditable.forEach((element) => {
-        detectContenteditable(element);
-    });
-    const inputAndTextAreaElements = document.querySelectorAll('input, textarea');
-    inputAndTextAreaElements.forEach((element) => {
-        addElementToWriteable(element, 'textarea');
-    });
-}
-
-document.addEventListener('input', (event) => {
-    detectContenteditable(event.target);
-    detectTextarea(event.target);
-});
-
-document.addEventListener('click', function (event) {
-    detectContenteditable(event.target);
-    detectTextarea(event.target);
-});
-
-const detectTextarea = (eventTarget) => {
-    if (eventTarget.tagName === 'TEXTAREA') {
-        addElementToWriteable(eventTarget, 'textarea');
-    }
+const stateManagment = {
+    isAuthenticated: ((isAuth && isAuth !== "") ? true : false),
+    reWritesAllowed: ((rerwriteState === BROWSER_COMMUNICATION.REWRITES_BAD) ? false : true),
+    grammarAllowed: ((grammarState === BROWSER_COMMUNICATION.GRAMMAR_BAD) ? false : true),
+    deployedRewrite: false,
+    deployedGrammar: false,
 }
 
 
-const detectContenteditable = (eventTarget) => {
-    if (eventTarget.isContentEditable) {
-        const recursive = (element) => {
-            if (element.getAttribute('contenteditable') === 'true') {
-                return element;
-            } else {
-                return recursive(element.parentElement);
-            }
-        }
-        addElementToWriteable(recursive(eventTarget));
-    }
+console.log(stateManagment);
+
+
+if (stateManagment.isAuthenticated && stateManagment.reWritesAllowed && !stateManagment.deployedRewrite) {
+    stateManagment.deployedRewrite = true;
+    createRewrite();
 }
 
-const idsToWriteable = {};
-
-
-const addElementToWriteable = (element, type = 'contenteditbale') => {
-    var id = element.id;
-    //detect if the element has an id
-    if (idsToWriteable[id] && element.id && element.id !== '' && element.id !== ' ') {
-        return;
-    }
-    //set id to the id with trimmed whitespace 
-    if (!id || id.trim() === '' || !id.trim()) {
-        id = `w${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}`;
-        element.id = id
-    }
-    if (type === 'textarea') {
-        idsToWriteable[element.id] = new Writeable(element, true);
-    } else {
-        idsToWriteable[element.id] = new Writeable(element, false);
-    }
+if (stateManagment.isAuthenticated && stateManagment.grammarAllowed && !stateManagment.deployedGrammar) {
+    stateManagment.deployedGrammar = true;
+    createGrammar();
 }
-
 
 
 window.addEventListener("message", (event) => {
-    messageListener(event);
+    console.log('we got a message');
+    const res = messageListener(event);
+    if (res.wordsmithType) {
+        if (res.wordsmithType === CHROME_CONSTANTS.CHROME_SIGNUP) {
+            console.log('1')
+            stateManagment.isAuthenticated = true;
+            if (stateManagment.reWritesAllowed && !stateManagment.deployedRewrite) {
+                console.log('2')
+                stateManagment.deployedRewrite = true;
+                createRewrite();
+            }
+            if (stateManagment.grammarAllowed && !stateManagment.deployedGrammar) {
+                console.log('3')
+                stateManagment.deployedGrammar = true;
+                createGrammar();
+            }
+        } else if (res.wordsmithType === BROWSER_COMMUNICATION.REWRITES) {
+            console.log('4')
+            if (res.message !== BROWSER_COMMUNICATION.REWRITES_BAD) {
+                stateManagment.reWritesAllowed = true;
+                if (!stateManagment.deployedRewrite && stateManagment.isAuthenticated.wordsmith_944_jwt_chrome) {
+                    console.log('5')
+                    stateManagment.deployedRewrite = true;
+                    createRewrite();
+                }
+            }
+        } else if (res.wordsmithType === BROWSER_COMMUNICATION.GRAMMAR) {
+            console.log('6')
+
+            if (res.message !== BROWSER_COMMUNICATION.GRAMMAR_BAD) {
+                console.log('7')
+
+                stateManagment.grammarAllowed = true;
+                if (!stateManagment.deployedRewrite && stateManagment.isAuthenticated.wordsmith_944_jwt_chrome) {
+                    console.log('8')
+                    stateManagment.deployedGrammar = true;
+                    createGrammar();
+                }
+            }
+        }
+    }
 }, false);
+
+
+
+
+
+
+
+
+
 

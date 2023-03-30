@@ -1,25 +1,33 @@
-import { CHROME_CONSTANTS } from '../constants.js';
+import { CHROME_CONSTANTS, BROWSER_COMMUNICATION } from '../constants.js';
 
 const messageListener = (event) => {
+    console.log('recieving top message');
     if (event.source != window) {
         return;
     }
     if (event.data) {
-        const type = event.data.wordsmithType;
-        const jwt = event.data.jwtToken;
+        console.log(event);
+        const data = event.data;
+        const type = data.wordsmithType;
+        var change = {}
         if (type) {
             if (type === CHROME_CONSTANTS.CHROME_SIGNUP) {
-                chrome.storage.sync.set({ wordsmith_944_jwt_chrome: jwt }, function () {
-                    // console.log("JWT token saved to chrome.storage signup");
+                const jwt = data.jwtToken;
+                chrome.storage.sync.set({ wordsmith_944_jwt_chrome: jwt }, () => {
+                    change.type = CHROME_CONSTANTS.CHROME_SIGNUP;
                 });
-                // chrome.storage.sync.get(['wordsmith_944_jwt_chrome'], function (result) {
-                //     console.log('Value currently is ' + result.wordsmith_944_jwt_chrome);
-                // });
+                change = { wordsmithType: CHROME_CONSTANTS.CHROME_SIGNUP, data: "good" }
+            } else if (type === BROWSER_COMMUNICATION.REWRITES || type === BROWSER_COMMUNICATION.GRAMMAR) {
+                change = data;
             } else if (type === CHROME_CONSTANTS.CHROME_LOGOUT) {
                 logout();
             }
         }
+        console.log('message listener is now returning: ');
+        console.log(change);
+        return change;
     }
+    return {}
 };
 
 

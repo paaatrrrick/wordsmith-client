@@ -13,6 +13,14 @@ const GRAMMAR_CONSTANTS = {
     CLASS_NAME: 'wordsmith-944-g-generic',
 }
 
+const BROWSER_COMMUNICATION = {
+    REWRITES: 'wordsmith-944-rewrite',
+    REWRITES_BAD: 'wordsmith-944-rewrite-bad',
+    GRAMMAR: 'wordsmith-944-grammar',
+    GRAMMAR_BAD: 'wordsmith-944-grammar-bad',
+}
+
+
 const POPUP_CONSTANTS = {
     API_ENDPOINT: API_ENDPOINT,
     EMAIL_SIGNUP_AUTH: '/auth/signup-email',
@@ -36,6 +44,8 @@ const CHROME_CONSTANTS = {
     CHROME_LOGOUT: 'wordsmith-chrome-logout-944',
     JWT_CHROME: "wordsmith_944_jwt_chrome",
     CIRCLE_ID: 'wordsmith-944-wordCircle',
+    CAN_REWRITE: 'wordsmith_944_rewriteChecked',
+    CAN_GRAMMAR: 'wordsmith_944_grammarChecked',
     REQUIRED_LENGTH: 15,
 }
 
@@ -51,4 +61,4 @@ const dropDownPillData = [
 
 
 //export all three constants
-export { POPUP_CONSTANTS, CHROME_CONSTANTS, dropDownPillData, GRAMMAR_CONSTANTS };
+export { POPUP_CONSTANTS, CHROME_CONSTANTS, dropDownPillData, GRAMMAR_CONSTANTS, BROWSER_COMMUNICATION };
