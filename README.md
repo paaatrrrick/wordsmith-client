@@ -54,8 +54,8 @@ From the client direct
 $ npm run start
 ```
 
--Upload the chrome build's file to the manage extensions page of google
--Run the backend
+- Upload the chrome build's file to the manage extensions page of google
+- Run the backend
 
 ## Next
 
